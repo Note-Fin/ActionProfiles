@@ -757,15 +757,13 @@ A[3] = function(icon, isMulti)
             end
 			
             -- maul,if=rage.deficit<10&active_enemies<4
-            if A.Maul:IsReady(unit) and 
+            if A.Maul:IsReady(unit) and Unit("player"):HasBuffsStacks(A.ToothandClaw.ID, true) >= 1 and
 			
 			(
-				A.Maul:GetSpellPowerCostCache() == 0 and
-				Unit("player"):HasBuffs(A.ToothandClaw.ID, true) == 1
+				A.Maul:GetSpellPowerCostCache() == 0
 				or
 				(
-					Player:Rage() > A.Maul:GetSpellPowerCostCache() and
-					Unit("player"):HasBuffs(A.ToothandClaw.ID, true) == 1
+					Player:Rage() > A.Maul:GetSpellPowerCostCache()
 				)
 			)
 			then
@@ -783,7 +781,7 @@ A[3] = function(icon, isMulti)
             end
 			
             -- ironfur,if=cost=0|(rage>cost&azerite.layered_mane.enabled&active_enemies>2)
-            if A.Ironfur:IsReady("player") and
+            if A.Ironfur:IsReady("player") and Unit("player"):HasBuffsStacks(A.ToothandClaw.ID, true) <=0 and
 			(
 			    A.Ironfur:GetSpellPowerCostCache() == 0 
 				or 
