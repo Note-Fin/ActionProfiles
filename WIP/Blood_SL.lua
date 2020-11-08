@@ -75,6 +75,7 @@ Action[ACTION_CONST_DEATHKNIGHT_BLOOD] = {
     Bonestorm                              = Action.Create({ Type = "Spell", ID = 194844 }),
     Heartbreaker                           = Action.Create({ Type = "Spell", ID = 221536 }),
     DeathandDecay                          = Action.Create({ Type = "Spell", ID = 43265 }),
+    RuneStrike                             = Action.Create({ Type = "Spell", ID = 210764 }),
     HeartStrike                            = Action.Create({ Type = "Spell", ID = 206930 }),
     CrimsonScourgeBuff                     = Action.Create({ Type = "Spell", ID = 81141, Hidden = true }),
     RapidDecomposition                     = Action.Create({ Type = "Spell", ID = 194662 }),
@@ -121,6 +122,7 @@ Action[ACTION_CONST_DEATHKNIGHT_BLOOD] = {
     ChainsofIce                            = Action.Create({ Type = "Spell", ID = 45524     }), -- 70% snare, 8sec
     RaiseAlly                              = Action.Create({ Type = "Spell", ID = 61999     }),     -- Battle rez
     DeathCaress                            = Action.Create({ Type = "Spell", ID = 195292 }),
+	BloodTap                               = Action.Create([ Type = "Spell", ID = 221699 ]), --Talent
     -- Potions
     PotionofUnbridledFury                  = Action.Create({ Type = "Potion", ID = 169299, QueueForbidden = true }), 
     BattlePotionOfAgility                  = Action.Create({ Type = "Potion", ID = 163223, QueueForbidden = true }), 
@@ -862,6 +864,11 @@ A[3] = function(icon, isMulti)
                 return A.GrongsPrimalRage:Show(icon)
             end
             
+            -- rune_strike
+            if A.RuneStrike:IsReady(unit) then
+                return A.RuneStrike:Show(icon)
+            end
+            
         end
         Standard = A.MakeFunctionCachedDynamic(Standard)
         
@@ -1197,4 +1204,5 @@ A[8] = function(icon)
     end     
     return ArenaRotation(icon, "arena3")
 end
+
 

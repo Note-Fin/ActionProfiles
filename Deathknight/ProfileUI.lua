@@ -1,9 +1,6 @@
 --------------------------------
 -- Note TMW Action ProfileUI --
 --------------------------------
-
---Full credit to Taste
-
 local TMW                                            = TMW 
 local CNDT                                            = TMW.CNDT
 local Env                                            = CNDT.Env
@@ -31,7 +28,7 @@ end
 
 A.Data.ProfileEnabled[Action.CurrentProfile] = true
 A.Data.ProfileUI = {      
-    DateTime = "v5.0.1 (24.10.2020)",
+    DateTime = "(08 Nov 2020)",
     -- Class settings
     [2] = {
         -- Unholy    
@@ -3218,6 +3215,4 @@ function A.Second_CastBars(unit)
         end 
     end 
 end 
-
-
 
