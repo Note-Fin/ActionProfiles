@@ -109,7 +109,7 @@ Action[ACTION_CONST_DEATHKNIGHT_BLOOD] = {
     VampiricBlood                          = Action.Create({ Type = "Spell", ID = 55233 }),
     DeathPact                              = Action.Create({ Type = "Spell", ID = 48743 }),    -- Talent
     GorefiendsGrasp                        = Action.Create({ Type = "Spell", ID = 108199 }),    -- Mass Grip
-    MarkofBlood                            = Action.Create({ Type = "Spell", ID = 206940 }),
+    MarkofBlood                            = Action.Create({ Type = "Spell", ID = 206940 }), -- Talent
     RuneTap                                = Action.Create({ Type = "Spell", ID = 194679 }),
     -- Utilities
     DarkCommand                            = Action.Create({ Type = "Spell", ID = 56222     }), 
