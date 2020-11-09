@@ -691,6 +691,10 @@ A[3] = function(icon, isMulti)
             then
                 return A.BloodDrinker:Show(icon)
             end
+			
+			if A.MarkofBlood:IsSpellLearned() and A.MarkofBlood:IsReady(unit) and Unit(unit):HasDeBuffs(A.MarkofBlood.ID, true) == 0 then
+				return A.MarkofBlood:Show(icon)
+			end
             
             -- marrowrend,if=(buff.bone_shield.remains<=rune.time_to_3|buff.bone_shield.remains<=(gcd+cooldown.blooddrinker.ready*talent.blooddrinker.enabled*2)|buff.bone_shield.stack<3)&runic_power.deficit>=20
             if A.Marrowrend:IsReady(unit) and 
