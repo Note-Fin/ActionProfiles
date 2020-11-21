@@ -125,6 +125,16 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
 	SuperiorBattlePotionofStrength         = Action.Create({ Type = "Potion", ID = 168500 }),
 	PotionofEmpoweredProximity             = Action.Create({ Type = "Potion", ID = 168529 }),
     -- Trinkets
+	-- Generic Covenants
+	Fleshcraft                             = Action.Create({ Type = "Potion", ID = 324631 }),
+	SummonSteward                          = Action.Create({ Type = "Potion", ID = 324739 }),
+	DoorOfShadows                          = Action.Create({ Type = "Potion", ID = 300728 }),
+	SoulShape                              = Action.Create({ Type = "Potion", ID = 310143 }),
+	-- Covenants
+	AdaptiveSwarm                          = Action.Create({ Type = "Potion", ID = 325727 }),
+	KindredSpirits                         = Action.Create({ Type = "Potion", ID = 326434 }),
+	RavenousFrenzy                         = Action.Create({ Type = "Potion", ID = 323546 }),
+	ConvokeTheSpirit                       = Action.Create({ Type = "Potion", ID = 323764 }),
 	-- Generic Legendaries
 	DraughtOfDeepFocus                     = Action.Create({ Type = "Potion", ID = 338658 }),
 	CircleOfLifeAndDeath                   = Action.Create({ Type = "Potion", ID = 338657 }),
