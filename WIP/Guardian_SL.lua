@@ -595,7 +595,7 @@ A[3] = function(icon, isMulti)
             end
 			
 			-- berserk,if=buff.bear_form.up,burstON
-			if A.Berserk:IsReady(unit) and A.BurstIsON(unit) then
+			if A.Berserk:IsReady(unit) and ((Unit(unit):HasDeBuffs(A.MoonfireDebuff.ID, true) or MultiUnits:GetByRange(30) > 1) and Unit(unit):HasDeBuffs(A.ThrashBearDebuff.ID, true)) then
 				return A.Berserk:Show(icon)
 			end
 			
