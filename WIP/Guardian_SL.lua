@@ -93,9 +93,9 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
     WildChargeBear                        = Action.Create({ Type = "Spell", ID = 16979     }),
     SurvivalInstincts                     = Action.Create({ Type = "Spell", ID = 61336     }),
     SkullBash                             = Action.Create({ Type = "Spell", ID = 106839     }),
-	Berserk                               = Action.Create({ Type = "Spell", ID = 50334      })
+	Berserk                               = Action.Create({ Type = "Spell", ID = 50334      }),
 	-- Utilities
-	Typhoon                               = Action.Create({ Type = "Spell", ID = 132469   }),
+	Typhoon                               = Action.Create({ Type = "Spell", ID = 132469 }),
 	MightyBash                            = Action.Create({ Type = "Spell", ID = 5211   }),
 	IncapacitatingRoar                    = Action.Create({ Type = "Spell", ID = 99  }),
 	Soothe                                = Action.Create({ Type = "Spell", ID = 2908   }),
@@ -510,7 +510,7 @@ A[3] = function(icon, isMulti)
     ------------------------------------------------------
     ---------------- ENEMY UNIT ROTATION -----------------
     ------------------------------------------------------
-    local function EnemyRotation(unit)
+	local function EnemyRotation(unit)
         
 		--Precombat
         local function Precombat(unit)
@@ -597,6 +597,7 @@ A[3] = function(icon, isMulti)
 			-- berserk,if=buff.bear_form.up,burstON
 			if A.Berserk:IsReady(unit) and A.BurstIsON(unit) then
 				return A.Berserk:Show(icon)
+			end
 			
             -- use_items
         end
