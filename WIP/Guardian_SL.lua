@@ -699,11 +699,6 @@ A[3] = function(icon, isMulti)
                 return A.Maul:Show(icon)
             end
 			
-            -- maul,if=essence.conflict_and_strife.major&!buff.sharpened_claws.up
-            if A.Maul:IsReady(unit) and (Azerite:EssenceHasMajor(A.ConflictandStrife.ID) and Unit("player"):HasBuffs(A.SharpenedClawsBuff.ID, true) == 0) then
-                return A.Maul:Show(icon)
-            end
-			
             -- maul
             if A.Maul:IsReady(unit) and Player:Rage() > 90 and A.GetToggle(2, "OffensiveRage") then
                 return A.Maul:Show(icon)
