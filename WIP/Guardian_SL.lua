@@ -611,7 +611,12 @@ A[3] = function(icon, isMulti)
 			
             -- use_items
         end
-        
+		
+		local covenant
+			--necrolord
+			--kyrian
+			--nightfae
+			--venthyr
         
         -- call precombat
         if Precombat(unit) and not inCombat and Unit(unit):IsExists() and unit ~= "mouseover" then 
