@@ -15,7 +15,6 @@ local BurstIsON									= Action.BurstIsON
 local AuraIsValid								= Action.AuraIsValid
 local InterruptIsValid							= Action.InterruptIsValid
 local FrameHasSpell								= Action.FrameHasSpell
-local Azerite									= LibStub("AzeriteTraits")
 local Utils										= Action.Utils
 local TeamCache									= Action.TeamCache
 local EnemyTeam									= Action.EnemyTeam
@@ -94,8 +93,9 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
     WildChargeBear                        = Action.Create({ Type = "Spell", ID = 16979     }),
     SurvivalInstincts                     = Action.Create({ Type = "Spell", ID = 61336     }),
     SkullBash                             = Action.Create({ Type = "Spell", ID = 106839     }),
+	Berserk                               = Action.Create({ Type = "Spell", ID = 50334      }),
 	-- Utilities
-	Typhoon                               = Action.Create({ Type = "Spell", ID = 132469   }),
+	Typhoon                               = Action.Create({ Type = "Spell", ID = 132469 }),
 	MightyBash                            = Action.Create({ Type = "Spell", ID = 5211   }),
 	IncapacitatingRoar                    = Action.Create({ Type = "Spell", ID = 99  }),
 	Soothe                                = Action.Create({ Type = "Spell", ID = 2908   }),
@@ -111,7 +111,7 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
     IncarnationBuff                       = Action.Create({ Type = "Spell", ID = 102558, Hidden = true     }),
     GalacticGuardianBuff                  = Action.Create({ Type = "Spell", ID = 213708, Hidden = true     }),
     SharpenedClawsBuff                    = Action.Create({ Type = "Spell", ID = 279943, Hidden = true     }),
-	ToothandClaw                          = Action.Create({ Type = "Spell", ID = 135286, Hidden = true     }),
+	ToothandClaw                          = Action.Create({ Type = "Spell", ID = 135286, Hidden = true     }), -- Talent
 	-- Debuffs 
     ThrashBearDebuff                      = Action.Create({ Type = "Spell", ID = 192090, Hidden = true     }),
     MoonfireDebuff                        = Action.Create({ Type = "Spell", ID = 164812, Hidden = true     }), 
@@ -125,79 +125,31 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
 	SuperiorBattlePotionofStrength         = Action.Create({ Type = "Potion", ID = 168500 }),
 	PotionofEmpoweredProximity             = Action.Create({ Type = "Potion", ID = 168529 }),
     -- Trinkets
-    AzsharasFontofPower                    = Action.Create({ Type = "Trinket", ID = 169314 }),
-    PocketsizedComputationDevice           = Action.Create({ Type = "Trinket", ID = 167555 }),
-    RotcrustedVoodooDoll                   = Action.Create({ Type = "Trinket", ID = 159624 }),
-    ShiverVenomRelic                       = Action.Create({ Type = "Trinket", ID = 168905 }),
-    AquipotentNautilus                     = Action.Create({ Type = "Trinket", ID = 169305 }),
-    TidestormCodex                         = Action.Create({ Type = "Trinket", ID = 165576 }),
-    VialofStorms                           = Action.Create({ Type = "Trinket", ID = 158224 }),
-    GalecallersBoon                        = Action.Create({ Type = "Trinket", ID = 159614 }),
-    InvocationOfYulon                      = Action.Create({ Type = "Trinket", ID = 165568 }),
-    LustrousGoldenPlumage                  = Action.Create({ Type = "Trinket", ID = 159617 }),
-    LurkersInsidiousGift                   = Action.Create({ Type = "Trinket", ID = 167866 }),
-    VigorTrinket                           = Action.Create({ Type = "Trinket", ID = 165572 }),
-    AshvanesRazorCoral                     = Action.Create({ Type = "Trinket", ID = 169311 }),
-    MalformedHeraldsLegwraps               = Action.Create({ Type = "Trinket", ID = 167835 }),
-    HyperthreadWristwraps                  = Action.Create({ Type = "Trinket", ID = 168989 }),
-    NotoriousAspirantsBadge                = Action.Create({ Type = "Trinket", ID = 167528 }),
-    NotoriousGladiatorsBadge               = Action.Create({ Type = "Trinket", ID = 167380 }),
-    SinisterGladiatorsBadge                = Action.Create({ Type = "Trinket", ID = 165058 }),
-    SinisterAspirantsBadge                 = Action.Create({ Type = "Trinket", ID = 165223 }),
-    DreadGladiatorsBadge                   = Action.Create({ Type = "Trinket", ID = 161902 }),
-    DreadAspirantsBadge                    = Action.Create({ Type = "Trinket", ID = 162966 }),
-    DreadCombatantsInsignia                = Action.Create({ Type = "Trinket", ID = 161676 }),
-    NotoriousAspirantsMedallion            = Action.Create({ Type = "Trinket", ID = 167525 }),
-    NotoriousGladiatorsMedallion           = Action.Create({ Type = "Trinket", ID = 167377 }),
-    SinisterGladiatorsMedallion            = Action.Create({ Type = "Trinket", ID = 165055 }),
-    SinisterAspirantsMedallion             = Action.Create({ Type = "Trinket", ID = 165220 }),
-    DreadGladiatorsMedallion               = Action.Create({ Type = "Trinket", ID = 161674 }),
-    DreadAspirantsMedallion                = Action.Create({ Type = "Trinket", ID = 162897 }),
-    DreadCombatantsMedallion               = Action.Create({ Type = "Trinket", ID = 161811 }),
-    IgnitionMagesFuse                      = Action.Create({ Type = "Trinket", ID = 159615 }),
-    TzanesBarkspines                       = Action.Create({ Type = "Trinket", ID = 161411 }),
-    AzurethosSingedPlumage                = Action.Create({ Type = "Trinket", ID = 161377 }),
-    AncientKnotofWisdomAlliance            = Action.Create({ Type = "Trinket", ID = 161417 }),
-    AncientKnotofWisdomHorde               = Action.Create({ Type = "Trinket", ID = 166793 }),
-    ShockbitersFang                        = Action.Create({ Type = "Trinket", ID = 169318 }),
-    NeuralSynapseEnhancer                  = Action.Create({ Type = "Trinket", ID = 168973 }),
-    BalefireBranch                         = Action.Create({ Type = "Trinket", ID = 159630 }),
-	GrongsPrimalRage                       = Action.Create({ Type = "Trinket", ID = 165574 }),
-	BygoneBeeAlmanac                       = Action.Create({ Type = "Trinket", ID = 163936 }),
-	RampingAmplitudeGigavoltEngine         = Action.Create({ Type = "Trinket", ID = 165580 }),
-	VisionofDemise                         = Action.Create({ Type = "Trinket", ID = 169307 }),
-	JesHowler                              = Action.Create({ Type = "Trinket", ID = 159627 }),
-	GalecallersBeak                        = Action.Create({ Type = "Trinket", ID = 161379 }),
-    DribblingInkpod                        = Action.Create({ Type = "Trinket", ID = 169319 }),
-    MerekthasFang                          = Action.Create({ Type = "Trinket", ID = 158367 }),	
-	GrongsPrimalRage                       = Action.Create({ Type = "Trinket", ID = 165574 }),
-	BygoneBeeAlmanac                       = Action.Create({ Type = "Trinket", ID = 163936 }),
-	RampingAmplitudeGigavoltEngine         = Action.Create({ Type = "Trinket", ID = 165580 }),
-	VisionofDemise                         = Action.Create({ Type = "Trinket", ID = 169307 }),
-	JesHowler                              = Action.Create({ Type = "Trinket", ID = 159627 }),
-	GalecallersBeak                        = Action.Create({ Type = "Trinket", ID = 161379 }),
-    DribblingInkpod                        = Action.Create({ Type = "Trinket", ID = 169319 }),
-    RazdunksBigRedButton                   = Action.Create({ Type = "Trinket", ID = 159611 }),
-    MerekthasFang                          = Action.Create({ Type = "Trinket", ID = 158367 }),
-    KnotofAncientFuryAlliance              = Action.Create({ Type = "Trinket", ID = 161413 }),
-    KnotofAncientFuryHorde                 = Action.Create({ Type = "Trinket", ID = 166795 }),
-    FirstMatesSpyglass                     = Action.Create({ Type = "Trinket", ID = 158163 }),
-    VialofAnimatedBlood                    = Action.Create({ Type = "Trinket", ID = 159625 }),
+	-- Generic Covenants
+	Fleshcraft                             = Action.Create({ Type = "Potion", ID = 324631 }),
+	SummonSteward                          = Action.Create({ Type = "Potion", ID = 324739 }),
+	DoorOfShadows                          = Action.Create({ Type = "Potion", ID = 300728 }),
+	SoulShape                              = Action.Create({ Type = "Potion", ID = 310143 }),
+	-- Covenants
+	AdaptiveSwarm                          = Action.Create({ Type = "Potion", ID = 325727 }),
+	KindredSpirits                         = Action.Create({ Type = "Potion", ID = 326434 }),
+	RavenousFrenzy                         = Action.Create({ Type = "Potion", ID = 323546 }),
+	ConvokeTheSpirit                       = Action.Create({ Type = "Potion", ID = 323764 }),
+	-- Generic Legendaries
+	DraughtOfDeepFocus                     = Action.Create({ Type = "Potion", ID = 338658 }),
+	CircleOfLifeAndDeath                   = Action.Create({ Type = "Potion", ID = 338657 }),
+	LycarasFleetingGlimpse                 = Action.Create({ Type = "Potion", ID = 340059 }),
+	OathOfTheElderDruid                    = Action.Create({ Type = "Potion", ID = 338608 }),
+	-- Guardian Legendaries
+	TheNaturalOrdersWill                   = Action.Create({ Type = "Potion", ID = 339063 }),
+	UrsocsFuryRemembered                   = Action.Create({ Type = "Potion", ID = 339056 }),
+	LuffaInfusedEmbrace                    = Action.Create({ Type = "Potion", ID = 339060 }),
+	LegacyOfTheSleeper                     = Action.Create({ Type = "Potion", ID = 339062 }),
+	-- Conduits
     -- Misc
     Channeling                             = Action.Create({ Type = "Spell", ID = 209274, Hidden = true     }),	-- Show an icon during channeling
     TargetEnemy                            = Action.Create({ Type = "Spell", ID = 44603, Hidden = true     }),	-- Change Target (Tab button)
     StopCast                               = Action.Create({ Type = "Spell", ID = 61721, Hidden = true     }),		-- spell_magic_polymorphrabbit
-    CyclotronicBlast                       = Action.Create({ Type = "Spell", ID = 293491, Hidden = true}),
-    ConcentratedFlameBurn                  = Action.Create({ Type = "Spell", ID = 295368, Hidden = true}),
-    RazorCoralDebuff                       = Action.Create({ Type = "Spell", ID = 303568, Hidden = true     }),
-    ConductiveInkDebuff                    = Action.Create({ Type = "Spell", ID = 302565, Hidden = true     }),
-    ConflictandStrife                    = Action.Create({ Type = "Spell", ID = 304017, Hidden = true     }),
-    -- Hidden Heart of Azeroth
-    -- added all 3 ranks ids in case used by rotation
-    VisionofPerfectionMinor                = Action.Create({ Type = "Spell", ID = 296320, Hidden = true}),
-    VisionofPerfectionMinor2               = Action.Create({ Type = "Spell", ID = 299367, Hidden = true}),
-    VisionofPerfectionMinor3               = Action.Create({ Type = "Spell", ID = 299369, Hidden = true}),
-    RecklessForceBuff                      = Action.Create({ Type = "Spell", ID = 302932, Hidden = true     }),	 
 };
 
 -- To create essences use next code:
@@ -233,6 +185,7 @@ local Temp = {
 }
 
 local IsIndoors, UnitIsUnit, UnitName = IsIndoors, UnitIsUnit, UnitName
+local player = "player"
 
 local function IsSchoolFree()
 	return LoC:IsMissed("SILENCE") and LoC:Get("SCHOOL_INTERRUPT", "SHADOW") == 0
@@ -268,21 +221,6 @@ local function SelfDefensives()
     if Unit(player):CombatTime() == 0 then 
         return 
     end 
-	
-    -- memory_of_lucid_dreams
-    if A.MemoryofLucidDreams:AutoHeartOfAzerothP(player, true) and Action.GetToggle(1, "HeartOfAzeroth") then 
-	    local LucidDreamTTD = GetToggle(2, "LucidDreamTTD")	
-	    local LucidDreamHP = GetToggle(2, "LucidDreamHP")
-            
-        if  (    
-                ( LucidDreamHP      >= 0     or LucidDreamTTD                    >= 0                                        ) and 
-                ( LucidDreamHP      <= 0     or Unit(player):HealthPercent()     <= LucidDreamHP                             ) and 
-                ( LucidDreamTTD     <= 0     or Unit(player):TimeToDie()         <= LucidDreamTTD                            ) 
-            )                 
-        then                
-            return A.MemoryofLucidDreams
-        end 
-    end
 			
     -- Ironfur (any role, whenever have physical damage)
 	local IronfurHPLost = GetToggle(2, "IronfurHPLost")
@@ -583,7 +521,7 @@ A[3] = function(icon, isMulti)
     ------------------------------------------------------
     ---------------- ENEMY UNIT ROTATION -----------------
     ------------------------------------------------------
-    local function EnemyRotation(unit)
+	local function EnemyRotation(unit)
         
 		--Precombat
         local function Precombat(unit)
@@ -591,10 +529,6 @@ A[3] = function(icon, isMulti)
             -- food
             -- augmentation
             -- snapshot_stats
-            -- memory_of_lucid_dreams
-            if A.MemoryofLucidDreams:AutoHeartOfAzeroth(unit, true) and Action.GetToggle(1, "HeartOfAzeroth") then
-                return A.MemoryofLucidDreams:Show(icon)
-            end
             -- bear_form
             if A.BearForm:IsReady(unit) and inStance ~= 1 then
                 return A.BearForm:Show(icon)
@@ -671,10 +605,11 @@ A[3] = function(icon, isMulti)
                 return A.Incarnation:Show(icon)
             end
 			
-            -- use_item,name=ashvanes_razor_coral,if=debuff.razor_coral_debuff.down|debuff.conductive_ink_debuff.up&target.health.pct<31|target.time_to_die<20
-            if A.AshvanesRazorCoral:IsReady(unit) and (bool(Unit(unit):HasDeBuffsDown(A.RazorCoralDebuff.ID, true)) or Unit(unit):HasDeBuffs(A.ConductiveInkDebuff.ID, true) and Unit(unit):HealthPercent() < 31 or Unit(unit):TimeToDie() < 20) then
-                return A.AshvanesRazorCoral:Show(icon)
-            end
+			-- berserk,if=buff.bear_form.up,burstON
+			if A.Berserk:IsReady(unit) and ((Unit(unit):HasDeBuffs(A.MoonfireDebuff.ID, true) or MultiUnits:GetByRange(30) > 1) and Unit(unit):HasDeBuffs(A.ThrashBearDebuff.ID, true)) then
+				return A.Berserk:Show(icon)
+			end
+			
             -- use_items
         end
         
@@ -699,11 +634,6 @@ A[3] = function(icon, isMulti)
             if Interrupt then 
                 return Interrupt:Show(icon)
             end	
-			
-			-- VigilantProtector
-            if A.VigilantProtector:AutoHeartOfAzeroth(unit, true) and Action.GetToggle(1, "HeartOfAzeroth") then
-                return A.VigilantProtector:Show(icon)
-            end
 								
 		    -- Taunt 
             if A.GetToggle(2, "AutoTaunt") 
@@ -767,11 +697,6 @@ A[3] = function(icon, isMulti)
 				)
 			)
 			then
-                return A.Maul:Show(icon)
-            end
-			
-            -- maul,if=essence.conflict_and_strife.major&!buff.sharpened_claws.up
-            if A.Maul:IsReady(unit) and (Azerite:EssenceHasMajor(A.ConflictandStrife.ID) and Unit("player"):HasBuffs(A.SharpenedClawsBuff.ID, true) == 0) then
                 return A.Maul:Show(icon)
             end
 			
