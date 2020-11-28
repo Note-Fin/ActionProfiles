@@ -116,11 +116,12 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
     ThrashBearDebuff                      = Action.Create({ Type = "Spell", ID = 192090, Hidden = true     }),
     MoonfireDebuff                        = Action.Create({ Type = "Spell", ID = 164812, Hidden = true     }), 
     -- Potions
+	PhialOfSerenity                        = Action.Create({ Type = "Potion", ID = 177278, QueueForbidden = true }),
     PotionofUnbridledFury                  = Action.Create({ Type = "Potion", ID = 169299, QueueForbidden = true }), 
     BattlePotionOfAgility                  = Action.Create({ Type = "Potion", ID = 163223, QueueForbidden = true }),  
     SuperiorPotionofUnbridledFury          = Action.Create({ Type = "Potion", ID = 168489, QueueForbidden = true }), 
 	SuperiorSteelskinPotion                = Action.Create({ Type = "Potion", ID = 168501, QueueForbidden = true }), 
-	AbyssalHealingPotion                   = Action.Create({ Type = "Potion", ID = 169451, QueueForbidden = true }),     
+	SpiritualHealingPotion                 = Action.Create({ Type = "Potion", ID = 171267, QueueForbidden = true }),     
 	PotionofFocusedResolve                 = Action.Create({ Type = "Potion", ID = 168506 }),
 	SuperiorBattlePotionofStrength         = Action.Create({ Type = "Potion", ID = 168500 }),
 	PotionofEmpoweredProximity             = Action.Create({ Type = "Potion", ID = 168529 }),
@@ -185,6 +186,7 @@ local Temp = {
 }
 
 local IsIndoors, UnitIsUnit, UnitName = IsIndoors, UnitIsUnit, UnitName
+local player = "player"
 
 local function IsSchoolFree()
 	return LoC:IsMissed("SILENCE") and LoC:Get("SCHOOL_INTERRUPT", "SHADOW") == 0
@@ -362,12 +364,12 @@ local function SelfDefensives()
         return A.SuperiorSteelskinPotion
     end
 	
-	-- HealingPotion
-    local AbyssalHealingPotion = A.GetToggle(2, "AbyssalHealingPotionHP")
-    if     AbyssalHealingPotion >= 0 and A.AbyssalHealingPotion:IsReady(player) and 
+	-- PhialOfSerenity
+    local PhialOfSerenity = A.GetToggle(2, "PhialOfSerenityHP")
+    if PhialOfSerenity >= 0 and A.PhialOfSerenity:IsReady(player) and 
     (
         (     -- Auto 
-            AbyssalHealingPotion >= 100 and 
+            PhialOfSerenity >= 100 and 
             (
                 -- HP lose per sec >= 20
                 Unit(player):GetDMG() * 100 / Unit(player):HealthMax() >= 10 or 
@@ -389,12 +391,12 @@ local function SelfDefensives()
             Unit(player):HasBuffs("DeffBuffs", true) == 0
         ) or 
         (    -- Custom
-            AbyssalHealingPotion < 100 and 
-            Unit(player):HealthPercent() <= AbyssalHealingPotion
+            PhialOfSerenity < 100 and 
+            Unit(player):HealthPercent() <= PhialOfSerenity
         )
     ) 
     then 
-        return A.AbyssalHealingPotion
+        return A.PhialOfSerenity
     end 			
 
 end 
@@ -609,14 +611,17 @@ A[3] = function(icon, isMulti)
 				return A.Berserk:Show(icon)
 			end
 			
+			if A.RavenousFrenzy:IsReady(unit) and ((Unit(unit):HasDeBuffs(A.MoonfireDebuff.ID, true) or MultiUnits:GetByRange(30) > 1) and Unit(unit):HasDeBuffs(A.ThrashBearDebuff.ID, true)) then
+				return A.RavenousFrenzy:Show(icon)
+			end
+			
+			if A.AdaptiveSwarm:IsReady(unit) and A.BurstIsON(unit) and not (Unit(unit):HasDeBuffs(A.AdaptiveSwarm.ID, true)) then
+				return A.AdaptiveSwarm:Show(icon)
+			end
+			
             -- use_items
         end
-		
-		local covenant
-			--necrolord
-			--kyrian
-			--nightfae
-			--venthyr
+        
         
         -- call precombat
         if Precombat(unit) and not inCombat and Unit(unit):IsExists() and unit ~= "mouseover" then 
