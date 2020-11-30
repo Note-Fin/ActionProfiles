@@ -120,31 +120,32 @@ Action[ACTION_CONST_DRUID_GUARDIAN] = {
     PotionofUnbridledFury                  = Action.Create({ Type = "Potion", ID = 169299, QueueForbidden = true }), 
     BattlePotionOfAgility                  = Action.Create({ Type = "Potion", ID = 163223, QueueForbidden = true }),  
     SuperiorPotionofUnbridledFury          = Action.Create({ Type = "Potion", ID = 168489, QueueForbidden = true }), 
+	SuperiorSteelskinPotion                = Action.Create({ Type = "Potion", ID = 168501, QueueForbidden = true }), 
 	SpiritualHealingPotion                 = Action.Create({ Type = "Potion", ID = 171267, QueueForbidden = true }),     
 	PotionofFocusedResolve                 = Action.Create({ Type = "Potion", ID = 168506 }),
 	SuperiorBattlePotionofStrength         = Action.Create({ Type = "Potion", ID = 168500 }),
 	PotionofEmpoweredProximity             = Action.Create({ Type = "Potion", ID = 168529 }),
     -- Trinkets
 	-- Generic Covenants
-	Fleshcraft                             = Action.Create({ Type = "Potion", ID = 324631 }),
-	SummonSteward                          = Action.Create({ Type = "Potion", ID = 324739 }),
-	DoorOfShadows                          = Action.Create({ Type = "Potion", ID = 300728 }),
-	SoulShape                              = Action.Create({ Type = "Potion", ID = 310143 }),
+	Fleshcraft                             = Action.Create({ Type = "Spell", ID = 324631 }),
+	SummonSteward                          = Action.Create({ Type = "Spell", ID = 324739 }),
+	DoorOfShadows                          = Action.Create({ Type = "Spell", ID = 300728 }),
+	SoulShape                              = Action.Create({ Type = "Spell", ID = 310143 }),
 	-- Covenants
-	AdaptiveSwarm                          = Action.Create({ Type = "Potion", ID = 325727 }),
-	KindredSpirits                         = Action.Create({ Type = "Potion", ID = 326434 }),
-	RavenousFrenzy                         = Action.Create({ Type = "Potion", ID = 323546 }),
-	ConvokeTheSpirit                       = Action.Create({ Type = "Potion", ID = 323764 }),
+	AdaptiveSwarm                          = Action.Create({ Type = "Spell", ID = 325727 }),
+	KindredSpirits                         = Action.Create({ Type = "Spell", ID = 326434 }),
+	RavenousFrenzy                         = Action.Create({ Type = "Spell", ID = 323546 }),
+	ConvokeTheSpirit                       = Action.Create({ Type = "Spell", ID = 323764 }),
 	-- Generic Legendaries
-	DraughtOfDeepFocus                     = Action.Create({ Type = "Potion", ID = 338658 }),
-	CircleOfLifeAndDeath                   = Action.Create({ Type = "Potion", ID = 338657 }),
-	LycarasFleetingGlimpse                 = Action.Create({ Type = "Potion", ID = 340059 }),
-	OathOfTheElderDruid                    = Action.Create({ Type = "Potion", ID = 338608 }),
+	DraughtOfDeepFocus                     = Action.Create({ Type = "Spell", ID = 338658 }),
+	CircleOfLifeAndDeath                   = Action.Create({ Type = "Spell", ID = 338657 }),
+	LycarasFleetingGlimpse                 = Action.Create({ Type = "Spell", ID = 340059 }),
+	OathOfTheElderDruid                    = Action.Create({ Type = "Spell", ID = 338608 }),
 	-- Guardian Legendaries
-	TheNaturalOrdersWill                   = Action.Create({ Type = "Potion", ID = 339063 }),
-	UrsocsFuryRemembered                   = Action.Create({ Type = "Potion", ID = 339056 }),
-	LuffaInfusedEmbrace                    = Action.Create({ Type = "Potion", ID = 339060 }),
-	LegacyOfTheSleeper                     = Action.Create({ Type = "Potion", ID = 339062 }),
+	TheNaturalOrdersWill                   = Action.Create({ Type = "Spell", ID = 339063 }),
+	UrsocsFuryRemembered                   = Action.Create({ Type = "Spell", ID = 339056 }),
+	LuffaInfusedEmbrace                    = Action.Create({ Type = "Spell", ID = 339060 }),
+	LegacyOfTheSleeper                     = Action.Create({ Type = "Spell", ID = 339062 }),
 	-- Conduits
     -- Misc
     Channeling                             = Action.Create({ Type = "Spell", ID = 209274, Hidden = true     }),	-- Show an icon during channeling
@@ -395,7 +396,7 @@ local function SelfDefensives()
     ) 
     then 
         return A.SpiritualHealingPotion
-    end 		
+    end 	
 
 end 
 SelfDefensives = A.MakeFunctionCachedDynamic(SelfDefensives)
