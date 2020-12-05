@@ -614,7 +614,7 @@ A[3] = function(icon, isMulti)
 				return A.RavenousFrenzy:Show(icon)
 			end
 			
-			if A.AdaptiveSwarm:IsReady(unit) and A.BurstIsON(unit) and not (Unit(unit):HasDeBuffs(A.AdaptiveSwarm.ID, true)) then
+			if A.AdaptiveSwarm:IsReady(unit) and A.BurstIsON(unit) and (Unit(unit):HasDeBuffs(A.AdaptiveSwarm.ID, true)) == 0 then
 				return A.AdaptiveSwarm:Show(icon)
 			end
 			
