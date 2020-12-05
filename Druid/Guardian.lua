@@ -1,5 +1,6 @@
 -------------------------------
 -- Note TMW Action Rotation --
+--      Version 1.0.0       --
 -------------------------------
 local _G, setmetatable							= _G, setmetatable
 local A                         			    = _G.Action

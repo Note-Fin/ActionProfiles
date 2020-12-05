@@ -1,5 +1,6 @@
 -------------------------------
 -- Note TMW Action Rotation --
+--      Version 1.0.0       --
 -------------------------------
 
 --Full credit to Taste
